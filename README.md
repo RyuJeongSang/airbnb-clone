@@ -6,7 +6,7 @@ Using List :
 
 - [ ] python
 - [ ] Django
-- [ ] HTML%
+- [ ] HTML5
 - [ ] Tailwind CSS
 - [ ] Glup
 - [ ] ES6
