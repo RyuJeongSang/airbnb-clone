@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "29862c985e880a2a95ce747149050f271027faa88c749a2393408d0b8cf341fc"
+            "sha256": "076c749a19fe40c31423f9a107b375df80a645a8b7a107eaeb36cb42a52e899b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -49,11 +49,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:2bf1078afc3db2dbab40ed4a353c21179e9703e57e9aa460f3d16ebade21d782",
-                "sha256:71eae67c12497da9e64b259306e3f145b6bbda9cc0a70de9f1b8860c3c9fca86"
+                "sha256:4d038ba51ae5e0a956d79cadd684d856e5750bfd608b61dad1807f8f08b1da49",
+                "sha256:f260f0375a44cd1e1a735c9b8c9b914304f607b5eef431d20e098c7c2f5b50a6"
             ],
             "markers": "python_version >= '3.5'",
-            "version": "==4.15.0"
+            "version": "==4.16.0"
         },
         "pillow": {
             "hashes": [
@@ -88,6 +88,21 @@
             ],
             "index": "pypi",
             "version": "==8.0.1"
+        },
+        "prettier-printer": {
+            "hashes": [
+                "sha256:061d607ebaba1bb6b93da3fde3dc74087b539095f381839cd1aba2f67b0203d0"
+            ],
+            "index": "pypi",
+            "version": "==0.1.4"
+        },
+        "pygments": {
+            "hashes": [
+                "sha256:381985fcc551eb9d37c52088a32914e00517e57f4a21609f48141ba08e193fa0",
+                "sha256:88a0bbcd659fcb9573703957c6b9cff9fab7295e6e76db54c9d00ae42df32773"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==2.7.2"
         },
         "python-dateutil": {
             "hashes": [

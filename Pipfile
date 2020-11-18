@@ -8,6 +8,7 @@ django = "==3.1.3"
 pillow = "*"
 django-countries = "*"
 django-seed = "*"
+prettier-printer = "*"
 
 [dev-packages]
 flake8 = "*"
