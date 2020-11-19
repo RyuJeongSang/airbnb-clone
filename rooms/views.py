@@ -1,4 +1,6 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
+from django.shortcuts import render
+from django_countries import countries
 from . import models
 
 
@@ -10,34 +12,60 @@ class HomeView(ListView):
     paginate_by = 10
     paginate_orphans = 5
     ordering = "created"
-    allow_empty = False
     context_object_name = "rooms"
 
 
-"""   function base View
-def all_rooms(request):
-    page = request.GET.get("page", 1)
-    page = int(page or 1)
-    room_list = models.Room.objects.all()
-    paginator = Paginator(room_list, 2, orphans=1)
-    try:
-        rooms = paginator.page(page)
-    except EmptyPage:
-        return redirect("/")
+class RoomDetail(DetailView):
 
-    page_numbers_range = 10
+    """ Room Detail Definition """
 
-    max_index = rooms.paginator.num_pages
-    start_index = int((page - 1) / page_numbers_range) * page_numbers_range
-    end_index = start_index + page_numbers_range
-    if end_index >= max_index:
-        end_index = max_index
+    model = models.Room
 
-    paginator_range = paginator.page_range[start_index:end_index]
+
+def search(request):
+    city = request.GET.get("city", "Anywhere")
+    city = str.capitalize(city)
+
+    country = request.GET.get("country", "KR")
+    room_type = int(request.GET.get("room_type", 0))
+    price = int(request.GET.get("price", 0))
+    guests = int(request.GET.get("guests", 0))
+    bedrooms = int(request.GET.get("bedrooms", 0))
+    beds = int(request.GET.get("beds", 0))
+    baths = int(request.GET.get("baths", 0))
+    instant = request.GET.get("instant", False)
+    super_host = request.GET.get("super_host", False)
+    selected_amenities = request.GET.getlist("amenities")
+    selected_facilities = request.GET.getlist("facilities")
+
+    form = {
+        "city": city,
+        "selected_country": country,
+        "selected_room_type": room_type,
+        "price": price,
+        "guests": guests,
+        "bedrooms": bedrooms,
+        "beds": beds,
+        "baths": baths,
+        "selected_amenities": selected_amenities,
+        "selected_facilities": selected_facilities,
+        "instant": instant,
+        "super_host": super_host,
+    }
+
+    room_types = models.RoomType.objects.all()
+    amenities = models.Amenity.objects.all()
+    facilities = models.Facility.objects.all()
+
+    choices = {
+        "countries": countries,
+        "room_types": room_types,
+        "amenities": amenities,
+        "facilities": facilities,
+    }
 
     return render(
         request,
-        "rooms/home.html",
-        {"rooms": rooms, "paginator_range": paginator_range},
+        "rooms/search.html",
+        {**form, **choices},
     )
-"""
