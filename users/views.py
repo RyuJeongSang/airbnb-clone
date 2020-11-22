@@ -29,3 +29,21 @@ class LogoutView(LogoutView):
 
     def get(self, request):
         return redirect(reverse("core:home"))
+
+
+class SignUpView(FormView):
+
+    """ SignUpView Definition """
+
+    template_name = "users/signup.html"
+    form_class = forms.SignUpForm
+    success_url = reverse_lazy("core:home")
+
+    def form_valid(self, form):
+        form.save()
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=email, password=password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)
