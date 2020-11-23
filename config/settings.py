@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,3 +139,16 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = BASE_DIR / "uploads"
 
 MEDIA_URL = "/media/"
+
+
+# Email Configuration
+
+EMAIL_HOST = "smtp.mailgun.org"
+
+EMAIL_PORT = "587"
+
+EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
+
+EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
+
+EMAIL_FROM = "new-example@sandbox440fc211f624452383675d740d268079.mailgun.org"
