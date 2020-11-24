@@ -140,3 +140,5 @@ cython_debug/
 #MacOS
 .DS_Store
 uploads/
+node_modules
+package-lock.json
