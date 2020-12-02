@@ -1,5 +1,7 @@
 import os
 import requests
+from django.http import HttpResponse
+from django.utils import translation
 from django.views.generic import FormView, DetailView, UpdateView
 from django.contrib.auth.views import (
     LogoutView,
@@ -9,6 +11,7 @@ from django.contrib.auth.views import (
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -270,4 +273,20 @@ class UpdatePasswordView(
 
 class UpdatePasswordDoneView(mixins.EmailLoginOnlyView, PasswordChangeDoneView):
     def get(self, request):
-        return redirect(reverse_lazy("core:home"))
+        return redirect(reverse("users:profile", kwargs={"pk": self.request.user.pk}))
+
+
+@login_required
+def switch_hosting(request):
+    try:
+        del request.session["is_hosting"]
+    except KeyError:
+        request.session["is_hosting"] = True
+    return redirect(reverse("core:home"))
+
+
+def switch_lang(request):
+    lang = request.GET.get("lang", None)
+    if lang is not None:
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang
+    return HttpResponse(status=200)

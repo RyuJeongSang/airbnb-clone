@@ -23,6 +23,15 @@
             <a href="{% url 'users:update' %}" class="btn btn--small bg-blue-300 text-white">Edit Profile</a>
         {% endif %}
     </div>
+    {% if user_obj.reservations.all.count > 0 %}
+        <div class="container mx-auto flex flex-col items-center">
+            <div class="flex flex-wrap mb-10 w-full">
+                {% for reservation in user_obj.reservations.all %}
+                    <a href="{% url 'reservations:detail' reservation.pk %}">{{reservation.room.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
     {% if user_obj.rooms.all.count > 0 %}
         <div class="container mx-auto flex flex-col items-center">
             <h3 class="mb-12 text-2xl">{{user_obj.first_name}}'s Rooms</h3>

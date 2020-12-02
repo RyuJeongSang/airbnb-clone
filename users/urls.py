@@ -29,4 +29,6 @@ urlpatterns = [
         name="password_done",
     ),
     path("<int:pk>/", views.UserProfileView.as_view(), name="profile"),
+    path("switch-hosting/", views.switch_hosting, name="switch-hosting"),
+    path("switch-language/", views.switch_lang, name="switch-language"),
 ]
